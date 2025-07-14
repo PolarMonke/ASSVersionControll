@@ -101,16 +101,15 @@ public partial class MainWindow : Window
 
             if (textWithComment != null)
             {
-                text = textWithComment;
-                int lastBraceOpen = textWithComment.LastIndexOf('{');
-                int lastBraceClose = textWithComment.LastIndexOf('}');
-
-                if (lastBraceOpen != -1 && lastBraceClose > lastBraceOpen)
+                var commentBuilder = new StringBuilder();
+                var matches = Regex.Matches(textWithComment, @"\{.*?\}");
+                foreach (Match match in matches)
                 {
-                    comment = textWithComment.Substring(lastBraceOpen, lastBraceClose - lastBraceOpen + 1);
-                    text = textWithComment.Substring(0, lastBraceOpen).Trim();
+                    commentBuilder.Append(match.Value);
                 }
-                text = Regex.Replace(text, @"\{.*?\}", "").Trim();
+                comment = commentBuilder.Length > 0 ? commentBuilder.ToString() : null;
+
+                text = Regex.Replace(textWithComment, @"\{.*?\}", "").Trim();
             }
             return new SubtitleEntry
             {
@@ -141,7 +140,7 @@ public partial class MainWindow : Window
             var parts = timecode.Split(':');
             if (parts.Length == 2) timecode = $"0:{timecode}";
             if (parts.Length > 3) timecode = string.Join(":", parts.Take(3));
-            
+
             return TimeSpan.Parse(timecode);
         }
         catch
@@ -168,7 +167,7 @@ public partial class MainWindow : Window
             {
                 if (TimecodesMatch(transLine, edLine))
                 {
-                    if (transLine.Content != edLine.Content || transLine.Comment != edLine.Comment)
+                    if (transLine.Content != edLine.Content)
                     {
                         changes.Add(
                             new SubtitleChange
@@ -240,15 +239,17 @@ public partial class MainWindow : Window
             switch (change.Type)
             {
                 case ChangeType.Added:
-                    sb.AppendLine($"[ADDED @ ~{change.ApproxPosition}] {change.Edited!.StartTime} → {change.Edited.EndTime}: {change.Edited.Content}");
+                    // if (change.Edited.Content != "")
+                    // {
+                    //     sb.AppendLine($"[ДАДАДЗЕНА @ ~{change.ApproxPosition}] {change.Edited!.StartTime} → {change.Edited.EndTime}: {change.Edited.Content}");
+                    // }
                     break;
                 case ChangeType.Deleted:
-                    sb.AppendLine($"[DELETED @ ~{change.ApproxPosition}] {change.Translated!.StartTime} → {change.Translated.EndTime}: {change.Translated.Content}");
+                    //sb.AppendLine($"[ВЫДАЛЕНА @ ~{change.ApproxPosition}] {change.Translated!.StartTime} → {change.Translated.EndTime}: {change.Translated.Content}");
                     break;
                 case ChangeType.Modified:
-                    sb.AppendLine($"[MODIFIED @ ~{change.ApproxPosition}]");
-                    sb.AppendLine($"  OLD: {change.Translated!.Content}");
-                    sb.AppendLine($"  NEW: {change.Edited!.Content}");
+                    sb.AppendLine($"[~{change.ApproxPosition}]");
+                    sb.AppendLine($"{change.Translated!.Content} → {change.Edited!.Content}");
                     break;
             }
         }
@@ -285,6 +286,7 @@ public partial class MainWindow : Window
             ChangesDisplay.Text = changesReport;
         }
     }
+    
     
     #endregion
 }
