@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AegisubVersionControl", "AegisubVersionControl.csproj", "{D76CA78E-2BCB-2739-DC0A-8533D4881CB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D76CA78E-2BCB-2739-DC0A-8533D4881CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D76CA78E-2BCB-2739-DC0A-8533D4881CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D76CA78E-2BCB-2739-DC0A-8533D4881CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D76CA78E-2BCB-2739-DC0A-8533D4881CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59CE9BCB-6CB7-4F32-9BD5-D9A09E5F7F96}
+	EndGlobalSection
+EndGlobal

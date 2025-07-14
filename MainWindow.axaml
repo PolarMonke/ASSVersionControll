@@ -1,0 +1,28 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AegisubVersionControl.MainWindow"
+        Title="AegisubVersionControl"
+        Width="400"
+        MinHeight="600">
+    
+    <Grid RowDefinitions="Auto,*" Margin="10">
+        <StackPanel Orientation="Horizontal" Spacing="10" Grid.Row="0">
+            <Button x:Name="LoadTranslatedButton" Click="LoadTranslatedButton_Click">Load Translated</Button>
+            <Button x:Name="LoadEditedButton" Click="LoadEditedButton_Click">Load Edited</Button>
+            <Button x:Name="FindChangesButton" Click="FindChangesButton_Click">Find Changes</Button>
+        </StackPanel>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="10">
+            <TextBox 
+                x:Name="ChangesDisplay"
+                Text="Changes will be displayed here" 
+                TextWrapping="Wrap"
+                MinHeight="100"
+                AcceptsReturn="True"
+                IsReadOnly="True"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
