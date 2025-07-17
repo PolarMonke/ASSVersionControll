@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using AegisubVersionControl.Views.Settings;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
@@ -248,7 +249,14 @@ public partial class MainWindow : Window
                     //sb.AppendLine($"[ВЫДАЛЕНА @ ~{change.ApproxPosition}] {change.Translated!.StartTime} → {change.Translated.EndTime}: {change.Translated.Content}");
                     break;
                 case ChangeType.Modified:
-                    sb.AppendLine($"[~{change.ApproxPosition}]");
+                    string startTime = change.Edited.StartTime;
+                    string endTime = change.Edited.EndTime;
+                    if (endTime[0] == '0')
+                    {
+                        startTime = startTime.Remove(0, 2);
+                        endTime = endTime.Remove(0, 2);
+                    }
+                    sb.AppendLine($"[~{change.ApproxPosition}] [{startTime} - {endTime}]");
                     sb.AppendLine($"{change.Translated!.Content} → {change.Edited!.Content}");
                     break;
             }
@@ -286,7 +294,12 @@ public partial class MainWindow : Window
             ChangesDisplay.Text = changesReport;
         }
     }
-    
+
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        var settings = new SettingsWindow();
+        settings.Show();
+    }
     
     #endregion
 }
