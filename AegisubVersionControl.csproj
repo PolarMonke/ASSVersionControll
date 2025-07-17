@@ -6,10 +6,14 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaResourceOutputType>Static</AvaloniaResourceOutputType>
+    <AvaloniaCompileBindings>True</AvaloniaCompileBindings>
 
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
+    <EnableNativeAotPreview>true</EnableNativeAotPreview>
+    <TrimMode>link</TrimMode>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
 
@@ -23,6 +27,7 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
     
   </ItemGroup>
