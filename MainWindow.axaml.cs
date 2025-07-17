@@ -29,6 +29,8 @@ public partial class MainWindow : Window
     List<SubtitleEntry> _translatedLines;
     List<SubtitleEntry> _editedLines;
 
+    AppSettings _currentSettings = new AppSettings();
+
     private async Task<string?> LoadAssFileAsync(string title)
     {
         try
@@ -235,33 +237,47 @@ public partial class MainWindow : Window
     public string GetChangeReport(List<SubtitleChange> changes)
     {
         var sb = new StringBuilder();
+
         foreach (var change in changes)
         {
+            string startTime = change.Edited?.StartTime ?? change.Translated?.StartTime ?? "";
+            string endTime = change.Edited?.EndTime ?? change.Translated?.EndTime ?? "";
+
+            if (startTime.Length >= 2 && startTime[0] == '0') startTime = startTime.Remove(0, 2);
+            if (endTime.Length >= 2 && endTime[0] == '0') endTime = endTime.Remove(0, 2);
+
+            string timeRange = _currentSettings.ShowTimeCodes ? $" [{startTime} - {endTime}]" : "";
+            string indexInfo = _currentSettings.ShowIndexes ? $"[~{change.ApproxPosition}]" : "";
+
             switch (change.Type)
             {
                 case ChangeType.Added:
-                    // if (change.Edited.Content != "")
-                    // {
-                    //     sb.AppendLine($"[ДАДАДЗЕНА @ ~{change.ApproxPosition}] {change.Edited!.StartTime} → {change.Edited.EndTime}: {change.Edited.Content}");
-                    // }
-                    break;
-                case ChangeType.Deleted:
-                    //sb.AppendLine($"[ВЫДАЛЕНА @ ~{change.ApproxPosition}] {change.Translated!.StartTime} → {change.Translated.EndTime}: {change.Translated.Content}");
-                    break;
-                case ChangeType.Modified:
-                    string startTime = change.Edited.StartTime;
-                    string endTime = change.Edited.EndTime;
-                    if (endTime[0] == '0')
+                    if (!string.IsNullOrWhiteSpace(change.Edited?.Content) && _currentSettings.ShowAdded)
                     {
-                        startTime = startTime.Remove(0, 2);
-                        endTime = endTime.Remove(0, 2);
+                        sb.AppendLine($"{indexInfo}[ДАДАДЗЕНА]{timeRange}: {change.Edited.Content}");
                     }
-                    sb.AppendLine($"[~{change.ApproxPosition}] [{startTime} - {endTime}]");
+                    break;
+
+                case ChangeType.Deleted:
+                    if (_currentSettings.ShowDeleted)
+                    {
+                        sb.AppendLine($"{indexInfo}[ВЫДАЛЕНА]{timeRange}: {change.Translated.Content}");
+                    }
+                    break;
+
+                case ChangeType.Modified:
+                    sb.AppendLine($"{indexInfo}{timeRange}");
                     sb.AppendLine($"{change.Translated!.Content} → {change.Edited!.Content}");
                     break;
             }
         }
+
         return sb.ToString();
+    }
+
+    private void ApplySettings(AppSettings settings)
+    {
+        _currentSettings = settings;
     }
 
     #region Event Handlers
@@ -295,10 +311,14 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    private async void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         var settings = new SettingsWindow();
-        settings.Show();
+        await settings.ShowDialog(this);
+
+        var updatedSettings = settings.SavedSettings;
+
+        ApplySettings(updatedSettings);
     }
     
     #endregion

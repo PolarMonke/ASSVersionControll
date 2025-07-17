@@ -11,6 +11,7 @@ namespace AegisubVersionControl.Views.Settings;
 public partial class SettingsWindow : Window
 {
     private AppSettings _appSettings = new AppSettings();
+    public AppSettings SavedSettings => _appSettings;
     private string _filePath;
 
     public SettingsWindow()
