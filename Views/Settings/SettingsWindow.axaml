@@ -16,7 +16,7 @@
             <CheckBox x:Name="ShowTimeCodesCheckBox">Паказваць таймкоды</CheckBox>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="SaveSettingsButton" Click="SaveSettingsButton_Click">Захаваць налады</Button>  
-                <Button x:Name="LoadDefaultsButton" Click="LoadDefaultsButton_Click">Па змаўчанні</Button>
+                <Button x:Name="LoadDefaultsButton" Click="LoadDefaultsButton_Click">Па змоўчанні</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

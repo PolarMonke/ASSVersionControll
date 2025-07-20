@@ -23,8 +23,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-    string _translated;
-    string _edited;
+    string? _translated;
+    string? _edited;
 
     List<SubtitleEntry> _translatedLines;
     List<SubtitleEntry> _editedLines;
@@ -87,7 +87,7 @@ public partial class MainWindow : Window
         }
         return entries;
     }
-    private SubtitleEntry ParseDialogueLine(string line)
+    private SubtitleEntry? ParseDialogueLine(string line)
     {
         try
         {
@@ -113,7 +113,7 @@ public partial class MainWindow : Window
                         commentBuilder.Append(match.Value);
                     }
                     comment = commentBuilder.Length > 0 ? commentBuilder.ToString() : null;
-                    comment = comment.Replace("{", "").Replace("}", "");
+                    comment = comment?.Replace("{", "").Replace("}", "");
                 }
                 
                 text = Regex.Replace(textWithComment, @"\{.*?\}", "").Trim();
