@@ -115,7 +115,7 @@ public partial class MainWindow : Window
                     comment = commentBuilder.Length > 0 ? commentBuilder.ToString() : null;
                     comment = comment?.Replace("{", "").Replace("}", "");
                 }
-                
+
                 text = Regex.Replace(textWithComment, @"\{.*?\}", "").Trim();
             }
             return new SubtitleEntry
@@ -327,6 +327,15 @@ public partial class MainWindow : Window
         var updatedSettings = settings.SavedSettings;
 
         ApplySettings(updatedSettings);
+    }
+
+    private async void CopyButton_Click(object sender, RoutedEventArgs e)
+    {
+        var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
+        if (clipboard != null)
+        {
+            await clipboard.SetTextAsync(ChangesDisplay.Text);
+        }
     }
     
     #endregion

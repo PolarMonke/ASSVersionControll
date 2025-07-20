@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public enum ChangeType
 {
     Unchanged,
@@ -12,4 +14,5 @@ public class SubtitleChange
     public SubtitleEntry? Translated { get; set; }
     public SubtitleEntry? Edited { get; set; }
     public int? ApproxPosition { get; set; }
+    //public List<int>? changedIndexes { get; set; } TODO
 }
