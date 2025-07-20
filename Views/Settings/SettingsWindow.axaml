@@ -6,7 +6,8 @@
         x:Class="AegisubVersionControl.Views.Settings.SettingsWindow"
         Title="ASS Version Controll - Налады"
         Width="300"
-        Height="200">
+        Height="200"
+        Icon="avares://AegisubVersionControl/Assets/icon.ico">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">
             <CheckBox x:Name="ShowAddedCheckBox">Паказваць дададзеныя радкі</CheckBox>

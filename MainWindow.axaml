@@ -6,7 +6,8 @@
         x:Class="AegisubVersionControl.MainWindow"
         Title="ASS Version Control"
         Width="610"
-        MinHeight="610">
+        MinHeight="610"
+        Icon="avares://AegisubVersionControl/Assets/icon.ico">
     
     <Grid RowDefinitions="Auto,*" Margin="10">
         <StackPanel Orientation="Horizontal" Spacing="10" Grid.Row="0">
