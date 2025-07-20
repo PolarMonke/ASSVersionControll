@@ -104,14 +104,18 @@ public partial class MainWindow : Window
 
             if (textWithComment != null)
             {
-                var commentBuilder = new StringBuilder();
-                var matches = Regex.Matches(textWithComment, @"\{.*?\}");
-                foreach (Match match in matches)
+                if (textWithComment[textWithComment.Length - 1] == '}')
                 {
-                    commentBuilder.Append(match.Value);
+                    var commentBuilder = new StringBuilder();
+                    var matches = Regex.Matches(textWithComment, @"\{.*?\}");
+                    foreach (Match match in matches)
+                    {
+                        commentBuilder.Append(match.Value);
+                    }
+                    comment = commentBuilder.Length > 0 ? commentBuilder.ToString() : null;
+                    comment = comment.Replace("{", "").Replace("}", "");
                 }
-                comment = commentBuilder.Length > 0 ? commentBuilder.ToString() : null;
-
+                
                 text = Regex.Replace(textWithComment, @"\{.*?\}", "").Trim();
             }
             return new SubtitleEntry
@@ -261,7 +265,7 @@ public partial class MainWindow : Window
                 case ChangeType.Deleted:
                     if (_currentSettings.ShowDeleted)
                     {
-                        sb.AppendLine($"{indexInfo}[ВЫДАЛЕНА]{timeRange}: {change.Translated.Content}");
+                        sb.AppendLine($"{indexInfo}[ВЫДАЛЕНА]{timeRange}: {change.Translated?.Content}");
                     }
                     break;
 
@@ -269,6 +273,10 @@ public partial class MainWindow : Window
                     sb.AppendLine($"{indexInfo}{timeRange}");
                     sb.AppendLine($"{change.Translated!.Content} → {change.Edited!.Content}");
                     break;
+            }
+            if (change.Edited != null && change.Edited.Comment != null)
+            {
+                sb.AppendLine($"[КАМЕНТАРЫЙ] {change.Edited.Comment}");
             }
         }
 
