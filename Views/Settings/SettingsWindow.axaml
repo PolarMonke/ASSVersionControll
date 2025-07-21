@@ -10,12 +10,14 @@
         Icon="avares://AegisubVersionControl/Assets/icon.ico">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">
-            <CheckBox x:Name="ShowAddedCheckBox">Паказваць дададзеныя радкі</CheckBox>
-            <CheckBox x:Name="ShowDeletedCheckBox">Паказваць выдаленыя радкі</CheckBox>
-            <CheckBox x:Name="ShowCommentsCheckBox">Паказваць каментарыі</CheckBox>
-            <CheckBox x:Name="ShowRowNumberCheckBox">Паказваць нумары радкоў</CheckBox>
-            <CheckBox x:Name="ShowTimeCodesCheckBox">Паказваць таймкоды</CheckBox>
-            <CheckBox x:Name="UnderlineChangesCheckBox">Падкрэсліваць змены</CheckBox>
+            <StackPanel Orientation="Vertical">
+                <CheckBox x:Name="ShowAddedCheckBox">Паказваць дададзеныя радкі</CheckBox>
+                <CheckBox x:Name="ShowDeletedCheckBox">Паказваць выдаленыя радкі</CheckBox>
+                <CheckBox x:Name="ShowCommentsCheckBox">Паказваць каментарыі</CheckBox>
+                <CheckBox x:Name="ShowRowNumberCheckBox">Паказваць нумары радкоў</CheckBox>
+                <CheckBox x:Name="ShowTimeCodesCheckBox">Паказваць таймкоды</CheckBox>
+                <CheckBox x:Name="UnderlineChangesCheckBox">Падкрэсліваць змены</CheckBox>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="SaveSettingsButton" Click="SaveSettingsButton_Click">Захаваць налады</Button>  
                 <Button x:Name="LoadDefaultsButton" Click="LoadDefaultsButton_Click">Па змоўчанні</Button>

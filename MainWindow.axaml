@@ -10,7 +10,7 @@
         Icon="avares://AegisubVersionControl/Assets/icon.ico">
     
     <Grid RowDefinitions="Auto,*,Auto" Margin="10">
-        <StackPanel Orientation="Horizontal" Spacing="10" Grid.Row="0">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10" Grid.Row="0">
             <Button x:Name="LoadTranslatedButton" Click="LoadTranslatedButton_Click">Загрузіць пераклад</Button>
             <Button x:Name="LoadEditedButton" Click="LoadEditedButton_Click">Загрузіць адрэдагаваны пераклад</Button>
             <Button x:Name="FindChangesButton" Click="FindChangesButton_Click">Знайсці змены</Button>
