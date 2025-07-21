@@ -20,13 +20,12 @@ public partial class SettingsWindow : Window
 
         ShowAddedCheckBox = this.FindControl<CheckBox>("ShowAddedCheckBox");
         ShowDeletedCheckBox = this.FindControl<CheckBox>("ShowDeletedCheckBox");
+        ShowCommentsCheckBox = this.FindControl<CheckBox>("ShowCommentsCheckBox");
         ShowRowNumberCheckBox = this.FindControl<CheckBox>("ShowRowNumberCheckBox");
         ShowTimeCodesCheckBox = this.FindControl<CheckBox>("ShowTimeCodesCheckBox");
+        UnderlineChangesCheckBox = this.FindControl<CheckBox>("UnderlineChangesCheckBox");
         SaveSettingsButton = this.FindControl<Button>("SaveSettingsButton");
         LoadDefaultsButton = this.FindControl<Button>("LoadDefaultsButton");
-
-        SaveSettingsButton.Click += SaveSettingsButton_Click;
-        LoadDefaultsButton.Click += LoadDefaultsButton_Click;
 
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         _filePath = Path.Combine(appData, "AegisubVersionControl", "AppSettings.json");
@@ -51,8 +50,10 @@ public partial class SettingsWindow : Window
         {
             ShowAdded = false,
             ShowDeleted = false,
-            ShowIndexes = true,
-            ShowTimeCodes = false
+            ShowComments = true,
+            ShowIndexes = false,
+            ShowTimeCodes = true,
+            UnderlineChanges = true
         };
 
         PutSettings();
@@ -68,11 +69,17 @@ public partial class SettingsWindow : Window
             if (ShowDeletedCheckBox != null)
                 ShowDeletedCheckBox.IsChecked = _appSettings.ShowDeleted;
 
+            if (ShowCommentsCheckBox != null)
+                ShowCommentsCheckBox.IsChecked = _appSettings.ShowComments;
+
             if (ShowRowNumberCheckBox != null)
                 ShowRowNumberCheckBox.IsChecked = _appSettings.ShowIndexes;
 
             if (ShowTimeCodesCheckBox != null)
                 ShowTimeCodesCheckBox.IsChecked = _appSettings.ShowTimeCodes;
+
+            if (UnderlineChangesCheckBox != null)
+                UnderlineChangesCheckBox.IsChecked = _appSettings.UnderlineChanges;
         }
         catch (Exception ex)
         {
@@ -102,8 +109,10 @@ public partial class SettingsWindow : Window
             {
                 ShowAdded = ShowAddedCheckBox?.IsChecked ?? false,
                 ShowDeleted = ShowDeletedCheckBox?.IsChecked ?? false,
+                ShowComments = ShowCommentsCheckBox?.IsChecked ?? true,
                 ShowIndexes = ShowRowNumberCheckBox?.IsChecked ?? true,
-                ShowTimeCodes = ShowTimeCodesCheckBox?.IsChecked ?? false
+                ShowTimeCodes = ShowTimeCodesCheckBox?.IsChecked ?? false,
+                UnderlineChanges = UnderlineChangesCheckBox?.IsChecked ?? true
             };
 
             string jsonString = JsonConvert.SerializeObject(_appSettings, Formatting.Indented);
