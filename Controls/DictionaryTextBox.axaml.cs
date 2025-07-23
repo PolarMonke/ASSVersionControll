@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia.Controls;
@@ -7,12 +8,12 @@ namespace AegisubVersionControl.Controls;
 
 public partial class DictionaryTextBox : UserControl
 {
-    const string BASELINK = "https://dictionaries.vivy.app/?q=";
+    public Dictionaries SelectedDictionary { get; set; } = Dictionaries.Vivy;
     public DictionaryTextBox()
     {
         InitializeComponent();
 
-        var menuItem = new MenuItem { Header = "Insert Dictionary Link" };
+        var menuItem = new MenuItem { Header = "Уставіць спасылку на слоўнік" };
         menuItem.Click += InsertDictionaryLink_Click;
         InnerTextBox.ContextMenu = new ContextMenu
         {
@@ -44,9 +45,9 @@ public partial class DictionaryTextBox : UserControl
         ScrollViewer? scrollViewer = FindParentScrollViewer(this);
         double currentScrollOffset = scrollViewer?.Offset.Y ?? 0;
 
-        string word = new string(SelectedText.Where(char.IsLetter).ToArray());
+        string word = new string(SelectedText.Where(char.IsLetter).ToArray()).ToLower();
         int lineEnd = GetLineEndIndex(SelectionStart);
-        string link = BASELINK + word;
+        string link = DictionaryLink.GetSearchLink(SelectedDictionary, word);
         InnerTextBox.Text = Text.Insert(lineEnd, link);
 
         int newCursorPosition = currentSelectionStart + currentSelectionLength;

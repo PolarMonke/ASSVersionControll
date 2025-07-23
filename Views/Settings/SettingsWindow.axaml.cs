@@ -26,6 +26,9 @@ public partial class SettingsWindow : Window
         UnderlineChangesCheckBox = this.FindControl<CheckBox>("UnderlineChangesCheckBox");
         SaveSettingsButton = this.FindControl<Button>("SaveSettingsButton");
         LoadDefaultsButton = this.FindControl<Button>("LoadDefaultsButton");
+        DictionariesComboBox = this.FindControl<ComboBox>("DictionariesComboBox");
+
+        DictionariesComboBox.ItemsSource = Enum.GetValues(typeof(Dictionaries));
 
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         _filePath = Path.Combine(appData, "AegisubVersionControl", "AppSettings.json");
@@ -53,7 +56,8 @@ public partial class SettingsWindow : Window
             ShowComments = true,
             ShowIndexes = false,
             ShowTimeCodes = true,
-            UnderlineChanges = true
+            UnderlineChanges = true,
+            DictionaryLink = Dictionaries.Vivy
         };
 
         PutSettings();
@@ -80,6 +84,9 @@ public partial class SettingsWindow : Window
 
             if (UnderlineChangesCheckBox != null)
                 UnderlineChangesCheckBox.IsChecked = _appSettings.UnderlineChanges;
+
+            if (DictionariesComboBox != null)
+                DictionariesComboBox.SelectedItem = _appSettings.DictionaryLink;
         }
         catch (Exception ex)
         {
@@ -112,7 +119,8 @@ public partial class SettingsWindow : Window
                 ShowComments = ShowCommentsCheckBox?.IsChecked ?? true,
                 ShowIndexes = ShowRowNumberCheckBox?.IsChecked ?? true,
                 ShowTimeCodes = ShowTimeCodesCheckBox?.IsChecked ?? false,
-                UnderlineChanges = UnderlineChangesCheckBox?.IsChecked ?? true
+                UnderlineChanges = UnderlineChangesCheckBox?.IsChecked ?? true,
+                DictionaryLink = (Dictionaries)(DictionariesComboBox?.SelectedItem ?? Dictionaries.Vivy)
             };
 
             string jsonString = JsonConvert.SerializeObject(_appSettings, Formatting.Indented);

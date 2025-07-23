@@ -69,6 +69,7 @@ public partial class MainWindow : Window
         var updatedSettings = settings.SavedSettings;
 
         _currentSettings = updatedSettings;
+        ChangesDisplay.SelectedDictionary = _currentSettings.DictionaryLink;
     }
 
     private async void CopyButton_Click(object sender, RoutedEventArgs e)

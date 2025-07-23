@@ -6,7 +6,7 @@
         x:Class="AegisubVersionControl.Views.Settings.SettingsWindow"
         Title="ASS Version Control - Налады"
         Width="300"
-        Height="260"
+        Height="310"
         Icon="avares://AegisubVersionControl/Assets/icon.ico">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">
@@ -17,6 +17,8 @@
                 <CheckBox x:Name="ShowRowNumberCheckBox">Паказваць нумары радкоў</CheckBox>
                 <CheckBox x:Name="ShowTimeCodesCheckBox">Паказваць таймкоды</CheckBox>
                 <CheckBox x:Name="UnderlineChangesCheckBox">Падкрэсліваць змены</CheckBox>
+                <TextBlock Text="Слоўнік:" Margin="0 5"/>
+                <ComboBox x:Name="DictionariesComboBox" HorizontalAlignment="Stretch" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="SaveSettingsButton" Click="SaveSettingsButton_Click">Захаваць налады</Button>  

@@ -15,7 +15,7 @@
             <Button x:Name="LoadTranslatedButton" Click="LoadTranslatedButton_Click">Загрузіць пераклад</Button>
             <Button x:Name="LoadEditedButton" Click="LoadEditedButton_Click">Загрузіць адрэдагаваны пераклад</Button>
             <Button x:Name="FindChangesButton" Click="FindChangesButton_Click">Знайсці змены</Button>
-            <Button x:Name="SettingsButton" Click="SettingsButton_Click">⚢</Button>
+            <Button x:Name="SettingsButton" Click="SettingsButton_Click">☀</Button>
         </StackPanel>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="10">
