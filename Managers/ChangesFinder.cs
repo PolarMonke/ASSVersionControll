@@ -42,6 +42,18 @@ public static class ChangesFinder
         var matches = Regex.Matches(input, @"[\w']+|\s+|[^\w\s']");
         return matches.Select(m => m.Value).ToArray();
     }
+    static void PrintMatrix(int[,] matrix, int len1, int len2)
+    {
+        for (int i = 0; i < len1; i++)
+        {
+            for (int j = 0; j < len2; j++)
+            {
+                System.Console.Write(matrix[i,j]);
+            }
+            System.Console.WriteLine("\n");
+        }
+    }
+
     private static (List<string>, List<string>) DiffAlign(string[] transWords, string[] edWords)
     {
         int transLen = transWords.Length;
@@ -63,6 +75,7 @@ public static class ChangesFinder
                 }
             }
         }
+        PrintMatrix(lcsTable, transLen + 1, edLen + 1);
         var alignedTrans = new List<string>();
         var alignedEd = new List<string>();
 

@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AegisubVersionControl.Controls.DictionaryTextBox">
+
+    <UserControl.Styles>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+        </Style>
+    </UserControl.Styles>
+    
+    <TextBox x:Name="InnerTextBox" 
+             TextWrapping="Wrap"
+             AcceptsReturn="True"
+             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
+</UserControl>

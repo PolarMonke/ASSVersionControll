@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AegisubVersionControl.Controls;assembly=AegisubVersionControl"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AegisubVersionControl.MainWindow"
         Title="ASS Version Control"
@@ -18,14 +19,15 @@
         </StackPanel>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="10">
-            <TextBox 
+            <local:DictionaryTextBox
                 x:Name="ChangesDisplay"
-                Text="Тут будуць адлюстроўвацца змены" 
-                TextWrapping="Wrap"
-                MinHeight="100"
-                AcceptsReturn="True"
-                IsReadOnly="True"/>
+                Text="Тут будуць адлюстроўвацца змены"
+                Background="White"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                MinHeight="400" />
         </ScrollViewer>
+
         <Button Grid.Row="2" HorizontalAlignment="Center" x:Name="CopyButton" Click="CopyButton_Click">Скапіяваць у буфер абмену</Button>
     </Grid>
 </Window>
