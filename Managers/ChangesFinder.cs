@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia.Controls.Embedding.Offscreen;
@@ -39,7 +40,7 @@ public static class ChangesFinder
     }
     static string[] Tokenize(string input)
     {
-        var matches = Regex.Matches(input, @"[\w']+|\s+|[^\w\s']");
+        var matches = Regex.Matches(input, @"\w+|[^\w\s]|\s");
         return matches.Select(m => m.Value).ToArray();
     }
     static void PrintMatrix(int[,] matrix, int len1, int len2)
@@ -137,6 +138,7 @@ public static class ChangesFinder
                             List<string> underlinedTrans;
                             List<string> underlinedEd;
                             (underlinedTrans, underlinedEd) = DiffAlign(transWords, edWords);
+                            
 
                             transLine.Content = string.Join("", underlinedTrans);
                             edLine.Content = string.Join("", underlinedEd);
